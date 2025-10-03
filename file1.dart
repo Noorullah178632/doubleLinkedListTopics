@@ -36,6 +36,29 @@ class DoubleLinkedList {
     newNode.prev = temp;
   }
 
+  //add element at the specific position
+  void insertAtPosition(int data, int position) {
+    if (position < 1) {
+      insertAtBegin(data);
+      return;
+    }
+    Node? temp = head!;
+    Node? newNode = Node(data);
+    int count = 1;
+    while (temp != null && count < position - 1) {
+      temp = temp.next;
+      count++;
+    }
+    if (temp == null || temp.next == null) {
+      addAtLast(data);
+      return;
+    }
+    newNode.next = temp.next;
+    newNode.prev = temp;
+    temp.next!.prev = newNode;
+    temp.next = newNode;
+  }
+
   //show the whole linkedList
   List<int> showLinkedList() {
     Node? temp = head!;
@@ -54,6 +77,8 @@ void main() {
   a.insertAtBegin(30);
   a.addAtLast(40);
   a.addAtLast(50);
+  a.insertAtPosition(11, 1);
+  a.insertAtPosition(44, 3);
   print(a.showLinkedList());
 }
 //count=1 < 9 → temp=20, count=2
