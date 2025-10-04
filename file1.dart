@@ -114,6 +114,56 @@ class DoubleLinkedList {
     }
   }
 
+  // move list in the backward way
+  List<int> showReversedLinkedList() {
+    if (head == null) {
+      return [];
+    }
+    Node? temp = head;
+    while (temp!.next != null) {
+      temp = temp.next;
+    }
+    List<int> storedData = [];
+    while (temp != null) {
+      storedData.add(temp.data);
+      temp = temp.prev;
+    }
+    return storedData;
+  }
+
+  //find a value in the linked list
+  void findValue(int data) {
+    if (head == null) {
+      return print("The linked list is empty ");
+    }
+    Node? temp = head;
+    while (temp != null) {
+      if (temp.data == data) {
+        print("We found the value :$data");
+        return;
+      }
+      temp = temp.next;
+    }
+    print("There is no such type of value :$data");
+  }
+
+  //update the functin
+  void updataValue(int oldValue, int newValue) {
+    if (head == null) {
+      return print("List is null");
+    }
+    Node? temp = head;
+    while (temp != null) {
+      if (temp.data == oldValue) {
+        temp.data = newValue;
+        print("value updated $oldValue -> $newValue");
+        return;
+      }
+      temp = temp.next;
+    }
+    print("There is no such type of value in the list :$oldValue");
+  }
+
   //show the whole linkedList
   List<int> showLinkedList() {
     Node? temp = head!;
@@ -134,11 +184,15 @@ void main() {
   a.addAtLast(50);
   a.insertAtPosition(11, 1);
   a.insertAtPosition(44, 3);
+  // a.findValue(110);
+  // a.findValue(40);
   // a.deleteAtBegin();
-  a.deleteAtEnd();
-  a.deleteAtPostion(3);
-  a.deleteAtPostion(2);
+  // a.deleteAtEnd();
+  // a.deleteAtPostion(3);
+  // a.deleteAtPostion(2);
+  a.updataValue(30, 300);
   print(a.showLinkedList());
+  //print(a.showReversedLinkedList());
 }
 //count=1 < 9 → temp=20, count=2
 
