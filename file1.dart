@@ -1,4 +1,5 @@
 //class for node
+
 class Node {
   int data;
   Node? prev;
@@ -9,6 +10,9 @@ class Node {
 //class for double linked list
 class DoubleLinkedList {
   Node? head;
+
+  //function for adding values in the double linked list
+
   //insert at begin
   void insertAtBegin(int data) {
     Node newNode = Node(data);
@@ -58,6 +62,57 @@ class DoubleLinkedList {
     temp.next!.prev = newNode;
     temp.next = newNode;
   }
+  // endding of adding value in the double linked list
+
+  //deleting vlaue from the double linked list
+
+  //delete first value at the double linked list
+  void deleteAtBegin() {
+    if (head == null) {
+      return;
+    }
+    head = head!.next;
+    if (head != null) {
+      head!.prev = null;
+    }
+  }
+
+  //delete last value at the linked list
+  void deleteAtEnd() {
+    if (head == null) {
+      return;
+    }
+    Node? temp = head;
+    while (temp!.next != null) {
+      temp = temp.next;
+    }
+    temp.prev!.next = null;
+  }
+
+  //delete at any position of the class
+  void deleteAtPostion(int position) {
+    if (head == null) {
+      return;
+    }
+    if (position == 1) {
+      deleteAtBegin();
+    }
+    Node? temp = head;
+    int count = 1;
+    while (temp != null && count < position) {
+      temp = temp.next;
+      count++;
+    }
+    if (temp == null) {
+      return;
+    }
+    if (temp.prev != null) {
+      temp.prev!.next = temp.next;
+    }
+    if (temp.next != null) {
+      temp.next!.prev = temp.prev;
+    }
+  }
 
   //show the whole linkedList
   List<int> showLinkedList() {
@@ -79,6 +134,10 @@ void main() {
   a.addAtLast(50);
   a.insertAtPosition(11, 1);
   a.insertAtPosition(44, 3);
+  // a.deleteAtBegin();
+  a.deleteAtEnd();
+  a.deleteAtPostion(3);
+  a.deleteAtPostion(2);
   print(a.showLinkedList());
 }
 //count=1 < 9 → temp=20, count=2
